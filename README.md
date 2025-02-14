@@ -2,6 +2,8 @@ Applying Machine Learning Techniques and  Optimization to Diagnose Ischemic Hear
 
 
 Abstract  
+
+
 Background: Ischemic heart disease (IHD) is a predominant cause of morbidity and mortality, 
 especially among diabetic individuals in Bangladesh. Early detection of ischemic heart disease is 
 essential for appropriate intervention and improved patient outcomes. Machine learning (ML) 
@@ -11,6 +13,8 @@ techniques to enhance the identification of ischemic heart disease in diabetic p
 Bangladesh. The main goal of this research is to examine the efficacy of machine learning 
 techniques, encompassing algorithm optimization and ensemble learning, for identifying ischemic 
 heart disease in diabetic patients via a cross-sectional study done in 2024.  
+
+
 Methods: A dataset comprising clinical, demographic, and laboratory data from diabetic patients 
 was analyzed utilizing fourteen distinct machine learning algorithms: Logistic Regression (LR), 
 k-Nearest Neighbors (kNN), Naive Bayes (NB), Decision Tree (DT), Support Vector Machine 
@@ -21,6 +25,10 @@ validation was utilized for hyperparameter adjustment to enhance the model's pre
 accuracy. The effectiveness of various models was evaluated based on accuracy and precision, 
 with a specific focus on assessing their generalization abilities using accuracy analysis for each 
 fold.  
+
+
+
+
 Results: The evaluation metrics indicate that Gradient Boosting is the most effective model, with 
 an accuracy of 0.910 and a ROC AUC of 0.9694. It consistently outperforms other models in these 
 areas, indicating that it is the most reliable model for classification tasks where predicted accuracy 
