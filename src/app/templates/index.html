@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IHD Diagnosis Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0d6efd;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+            padding: 10px 20px;
+        }
+        .result-container {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        .result-positive {
+            background-color: #f8d7da;
+            border: 1px solid #f5c2c7;
+        }
+        .result-negative {
+            background-color: #d1e7dd;
+            border: 1px solid #badbcc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Ischemic Heart Disease (IHD) Diagnosis Tool</h1>
+        
+        <form id="diagnosis-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="age">Age (Years)</label>
+                        <input type="number" class="form-control" id="age" name="Age (Years)" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="sex">Sex</label>
+                        <select class="form-control" id="sex" name="Sex (Male/Female)" required>
+                            <option value="">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="height">Height (cm)</label>
+                        <input type="number" step="0.1" class="form-control" id="height" name="Height (cm)" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" step="0.1" class="form-control" id="weight" name="Weight (kg)" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="systolic">Systolic Blood Pressure (mmHg)</label>
+                        <input type="number" class="form-control" id="systolic" name="Systolic Blood Pressure (mmHg)" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="diastolic">Diastolic Blood Pressure (mmHg)</label>
+                        <input type="number" class="form-control" id="diastolic" name="Diastolic Blood Pressure (mmHg)" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="rbs">Random Blood Sugar (mg/dL)</label>
+                        <input type="number" class="form-control" id="rbs" name="Random Blood Sugar (mg/dL)" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="smoking">Smoking Status</label>
+                        <select class="form-control" id="smoking" name="Smoking Status" required>
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="htn">Hypertension (HTN) Status</label>
+                        <select class="form-control" id="htn" name="Hypertension (HTN) Status" required>
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dm">Diabetes Mellitus (DM) Status</label>
+                        <select class="form-control" id="dm" name="Diabetes Mellitus (DM) Status" required>
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dyslipidemia">Dyslipidemia Status</label>
+                        <select class="form-control" id="dyslipidemia" name="Dyslipidemia Status" required>
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="stroke">Stroke Status</label>
+                        <select class="form-control" id="stroke" name="Stroke Status" required>
+                            <option value="">Select</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Diagnose</button>
+            </div>
+        </form>
+        
+        <div id="result" class="result-container">
+            <h3 class="text-center" id="result-title"></h3>
+            <p class="text-center" id="result-text"></p>
+            <p class="text-center"><strong>Confidence: </strong><span id="result-probability"></span></p>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('diagnosis-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Convert numeric values
+            data['Age (Years)'] = parseFloat(data['Age (Years)']);
+            data['Height (cm)'] = parseFloat(data['Height (cm)']);
+            data['Weight (kg)'] = parseFloat(data['Weight (kg)']);
+            data['Systolic Blood Pressure (mmHg)'] = parseFloat(data['Systolic Blood Pressure (mmHg)']);
+            data['Diastolic Blood Pressure (mmHg)'] = parseFloat(data['Diastolic Blood Pressure (mmHg)']);
+            data['Random Blood Sugar (mg/dL)'] = parseFloat(data['Random Blood Sugar (mg/dL)']);
+            
+            // Make prediction
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                // Display result
+                const resultContainer = document.getElementById('result');
+                const resultTitle = document.getElementById('result-title');
+                const resultText = document.getElementById('result-text');
+                const resultProbability = document.getElementById('result-probability');
+                
+                if (result.error) {
+                    resultTitle.textContent = 'Error';
+                    resultText.textContent = result.error;
+                    resultProbability.textContent = '';
+                    resultContainer.className = 'result-container';
+                } else {
+                    if (result.prediction === 1) {
+                        resultTitle.textContent = 'Positive IHD Diagnosis';
+                        resultText.textContent = 'The model predicts that the patient has Ischemic Heart Disease (IHD).';
+                        resultContainer.className = 'result-container result-positive';
+                    } else {
+                        resultTitle.textContent = 'Negative IHD Diagnosis';
+                        resultText.textContent = 'The model predicts that the patient does not have Ischemic Heart Disease (IHD).';
+                        resultContainer.className = 'result-container result-negative';
+                    }
+                    
+                    if (result.probability !== null) {
+                        resultProbability.textContent = `${(result.probability * 100).toFixed(2)}%`;
+                    } else {
+                        resultProbability.textContent = 'Not available';
+                    }
+                }
+                
+                resultContainer.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                
+                // Display error
+                const resultContainer = document.getElementById('result');
+                const resultTitle = document.getElementById('result-title');
+                const resultText = document.getElementById('result-text');
+                const resultProbability = document.getElementById('result-probability');
+                
+                resultTitle.textContent = 'Error';
+                resultText.textContent = 'An error occurred while making the prediction.';
+                resultProbability.textContent = '';
+                resultContainer.className = 'result-container';
+                resultContainer.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
