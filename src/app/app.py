@@ -25,14 +25,14 @@ scaler = None
 def load_model():
     """
     Load model, label encoders, and scaler.
-    
+
     Returns:
     --------
     tuple
         Model, label encoders, and scaler.
     """
     global model, label_encoders, scaler
-    
+
     try:
         # Load model
         if os.path.exists(MODEL_PATH):
@@ -41,7 +41,7 @@ def load_model():
         else:
             print(f"Model file not found: {MODEL_PATH}")
             model = None
-        
+
         # Load label encoders
         if os.path.exists(LABEL_ENCODERS_PATH):
             label_encoders = joblib.load(LABEL_ENCODERS_PATH)
@@ -49,7 +49,7 @@ def load_model():
         else:
             print(f"Label encoders file not found: {LABEL_ENCODERS_PATH}")
             label_encoders = None
-        
+
         # Load scaler
         if os.path.exists(SCALER_PATH):
             scaler = joblib.load(SCALER_PATH)
@@ -57,9 +57,9 @@ def load_model():
         else:
             print(f"Scaler file not found: {SCALER_PATH}")
             scaler = None
-        
+
         return model, label_encoders, scaler
-    
+
     except Exception as e:
         print(f"Error loading model: {e}")
         return None, None, None
@@ -68,12 +68,12 @@ def load_model():
 def preprocess_input(input_data):
     """
     Preprocess input data.
-    
+
     Parameters:
     -----------
     input_data : dict
         Input data.
-        
+
     Returns:
     --------
     pd.DataFrame
@@ -81,30 +81,30 @@ def preprocess_input(input_data):
     """
     # Convert input data to dataframe
     df = pd.DataFrame([input_data])
-    
+
     # Encode categorical features
     if label_encoders is not None:
         for col, encoder in label_encoders.items():
             if col in df.columns:
                 df[col] = encoder.transform(df[col])
-    
+
     # Scale numerical features
     if scaler is not None:
         numerical_cols = df.select_dtypes(include=[np.number]).columns
         df[numerical_cols] = scaler.transform(df[numerical_cols])
-    
+
     return df
 
 
 def make_prediction(input_data):
     """
     Make prediction.
-    
+
     Parameters:
     -----------
     input_data : dict
         Input data.
-        
+
     Returns:
     --------
     dict
@@ -115,29 +115,29 @@ def make_prediction(input_data):
         load_model()
         if model is None:
             return {"error": "Model not loaded"}
-    
+
     try:
         # Preprocess input data
         preprocessed_data = preprocess_input(input_data)
-        
+
         # Make prediction
         prediction = model.predict(preprocessed_data)[0]
-        
+
         # Get prediction probability if available
         if hasattr(model, 'predict_proba'):
             probabilities = model.predict_proba(preprocessed_data)[0]
             probability = probabilities.max()
         else:
             probability = None
-        
+
         # Create result
         result = {
             "prediction": int(prediction),
             "probability": float(probability) if probability is not None else None
         }
-        
+
         return result
-    
+
     except Exception as e:
         return {"error": str(e)}
 
@@ -146,7 +146,7 @@ def make_prediction(input_data):
 def home():
     """
     Home page.
-    
+
     Returns:
     --------
     str
@@ -159,7 +159,7 @@ def home():
 def predict():
     """
     Prediction endpoint.
-    
+
     Returns:
     --------
     dict
@@ -167,10 +167,10 @@ def predict():
     """
     # Get input data
     input_data = request.json
-    
+
     # Make prediction
     result = make_prediction(input_data)
-    
+
     return jsonify(result)
 
 
@@ -178,7 +178,7 @@ def predict():
 def health():
     """
     Health check endpoint.
-    
+
     Returns:
     --------
     dict
@@ -190,6 +190,6 @@ def health():
 if __name__ == '__main__':
     # Load model
     load_model()
-    
+
     # Run app
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=8080)
